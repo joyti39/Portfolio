@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sadia Akther Joyti | Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          base:    'var(--color-base)',
+          surface: 'var(--color-surface)',
+          raised:  'var(--color-raised)',
+          line:    'var(--color-line)',
+          ink:     'var(--color-ink)',
+          faint:   'var(--color-faint)',
+          cyan:    'var(--color-cyan)',
+          amber:   'var(--color-amber)',
+        },
+        fontFamily: {
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          sans: ['"Space Grotesk"', 'sans-serif'],
+        },
+      },
+    },
+  }
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+
+<body class="bg-base text-ink font-sans antialiased">
+
+<canvas id="net-bg"></canvas>
+
+<!-- scanning progress bar -->
+<div id="scan-bar" class="fixed top-0 left-0 h-[2px] bg-cyan z-50" style="width:0%"></div>
+
+<!-- Navbar -->
+<header id="site-header" class="fixed top-0 inset-x-0 z-40 border-b border-line bg-base/80 backdrop-blur">
+
+  <nav class="max-w-6xl mx-auto px-6 py-4 grid grid-cols-3 items-center">
+
+    <a href="#home" class="flex items-center">
+      <span class="logo-circle w-10 h-10 rounded-full overflow-hidden bg-base border-2 border-cyan flex items-center justify-center">
+        <img src="logo.png" alt="Jo logo" class="w-full h-full object-cover">
+      </span>
+    </a>
+
+    <div id="nav-links" class="hidden md:flex justify-center gap-8 text-sm font-mono">
+      <a href="#home"         data-nav class="nav-link text-faint hover:text-cyan transition-colors">Home</a>
+      <a href="#about"        data-nav class="nav-link text-faint hover:text-cyan transition-colors">About</a>
+      <a href="#education"    data-nav class="nav-link text-faint hover:text-cyan transition-colors">Education</a>
+       <a href="#projects"     data-nav class="nav-link text-faint hover:text-cyan transition-colors">Projects</a>
+      <a href="#achievements" data-nav class="nav-link text-faint hover:text-cyan transition-colors">Achievements</a>
+      <a href="#contact"      data-nav class="nav-link text-faint hover:text-cyan transition-colors">Contact</a>
+    </div>
+
+    <div class="flex justify-end items-center gap-4">
+     <a href="#contact" class="hire-btn hidden md:inline-flex items-center bg-cyan text-base font-mono text-xs font-semibold px-5 py-2 rounded-full hover:bg-amber transition-colors">
+  Hire Me
+</a>
+<button id="theme-toggle" aria-label="Toggle dark/light mode"
+        class="relative w-10 h-10 rounded-full border border-line flex items-center justify-center hover:border-cyan transition-colors">
+  <svg class="icon-sun w-5 h-5 text-amber" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="4"/>
+    <path stroke-linecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+  </svg>
+  <svg class="icon-moon w-5 h-5 text-cyan" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+</button>
+</button>
+      <button id="menu-btn" aria-label="Toggle menu" class="md:hidden text-ink">
+        <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+  </nav>
+
+  <div id="mobile-menu" class="hidden md:hidden border-t border-line bg-base px-6 py-4 flex flex-col gap-4 font-mono text-sm">
+    <a href="#home"         data-nav class="nav-link text-faint hover:text-cyan">Home</a>
+    <a href="#about"        data-nav class="nav-link text-faint hover:text-cyan">About</a>
+    <a href="#projects"     data-nav class="nav-link text-faint hover:text-cyan">Projects</a>
+    <a href="#education"    data-nav class="nav-link text-faint hover:text-cyan">Education</a>
+    <a href="#achievements" data-nav class="nav-link text-faint hover:text-cyan">Achievements</a>
+    <a href="#contact"      data-nav class="nav-link text-faint hover:text-cyan">Contact</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section id="home" class="relative pt-40 pb-24 border-b border-line overflow-hidden">
+
+  
+
+  <div class="relative max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
+
+    <div>
+      <h1 class="text-4xl md:text-6xl font-bold leading-tight text-ink">
+        Hi there, I'm<br>
+        Sadia Akther <span class="text-cyan">Joyti</span>
+      </h1>
+
+      <p class="mt-5 text-xl md:text-2xl text-faint font-mono h-8">
+        I am into <span id="typed" class="text-amber"></span><span class="border-r-2 border-amber animate-pulse ml-0.5"></span>
+      </p>
+
+      <p class="mt-6 text-faint leading-relaxed max-w-md">
+       My passion is web development, but I'm also interested in AI and ML.
+       I enjoy building functional programs, from interactive interfaces to
+       database-driven systems, and apply that same approach to solving
+       real-world problems with machine learning.
+      </p>
+
+      <div class="flex gap-4 mt-8">
+       <button type="button" id="resume-btn" class="inline-flex items-center gap-2 bg-cyan text-base font-mono text-xs font-semibold px-5 py-2.5 rounded-full hover:bg-amber transition-colors">
+  Resume
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+</button>
+
+        <a href="#contact" class="inline-flex items-center gap-2 font-mono text-xs font-semibold px-5 py-2.5 rounded-full border border-cyan text-cyan hover:bg-cyan hover:text-base transition-colors">
+          Contact
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="flex justify-center md:justify-end">
+  <div id="scan-ring" class="relative w-64 h-64 md:w-80 md:h-80 rounded-full p-2">
+    <div class="w-full h-full rounded-full overflow-hidden bg-surface border-2 border-line">
+      <img src="img2.jpg" alt="Sadia Akther Joyti" class="w-full h-full object-cover">
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="py-24 border-b border-line">
+  <div class="max-w-6xl mx-auto px-6">
+
+  
+    <h2 class="text-3xl md:text-4xl font-semibold mb-12">
+      About Me
+    </h2>
+
+    <div class="grid lg:grid-cols-2 gap-14 items-start">
+
+      <!-- About -->
+      <div class="reveal">
+  <p class="text-faint leading-relaxed">
+  I'm a CSE graduate from
+  <span class="text-ink font-medium">
+    International Islamic University Chittagong (IIUC)
+  </span>,
+  driven by a simple belief:
+  <span class="text-ink">
+    ship something real, measure how it performs, and refine it based on evidence
+  </span>.
+  I'm most drawn to
+  <span class="text-ink">
+    web development
+  </span>,
+  building real, working applications with the
+  <span class="text-ink">
+    MERN stack 
+  </span>
+  along with
+  <span class="text-ink">
+    Tailwind CSS, Vite, React Router, Leaflet and REST APIs
+  </span>,
+  and with
+  <span class="text-ink">
+    HTML, CSS, JavaScript, PHP, MySQL, and Django
+  </span>.
+  I'm equally invested in
+  <span class="text-ink">
+    AI/ML
+  </span>, using
+  <span class="text-ink">
+    Python, Pandas, Scikit-learn, PyTorch, TensorFlow, YOLOv8, SAM2, and OpenCV
+  </span>
+  for computer vision and fraud detection work. I round this out with
+  <span class="text-ink">
+    C/C++, LaTeX, and Kali Linux
+  </span>
+  for lower-level and security work. What excites me most is the overlap: turning a trained model into something people can actually use through a deployed web application.
+</p>
+      </div>
+
+<!-- Skills -->
+<div class="reveal">
+
+  <div class="inline-block font-mono text-xs text-cyan border border-cyan/40 bg-cyan/10 rounded-md px-3 py-1 mb-6">
+    skills
+  </div>
+
+  <div class="grid grid-cols-2 gap-x-8 gap-y-6">
+
+    <div>
+      <div class="flex justify-between items-baseline mb-2 font-mono text-sm gap-2">
+        <span class="text-ink whitespace-nowrap">Web Development </span>
+        <span class="text-cyan shrink-0">95%</span>
+      </div>
+      <div class="w-full h-2 bg-line rounded-full overflow-hidden">
+        <div class="skill-fill h-full bg-cyan rounded-full" data-width="95"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex justify-between items-baseline mb-2 font-mono text-sm gap-2">
+        <span class="text-ink whitespace-nowrap">Python</span>
+        <span class="text-cyan shrink-0">90%</span>
+      </div>
+      <div class="w-full h-2 bg-line rounded-full overflow-hidden">
+        <div class="skill-fill h-full bg-cyan rounded-full" data-width="90"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex justify-between items-baseline mb-2 font-mono text-sm gap-2">
+        <span class="text-ink whitespace-nowrap">Machine Learning</span>
+        <span class="text-cyan shrink-0">90%</span>
+      </div>
+      <div class="w-full h-2 bg-line rounded-full overflow-hidden">
+        <div class="skill-fill h-full bg-cyan rounded-full" data-width="90"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex justify-between items-baseline mb-2 font-mono text-sm gap-2">
+        <span class="text-ink whitespace-nowrap">Computer Vision</span>
+        <span class="text-cyan shrink-0">85%</span>
+      </div>
+      <div class="w-full h-2 bg-line rounded-full overflow-hidden">
+        <div class="skill-fill h-full bg-cyan rounded-full" data-width="85"></div>
+      </div>
+    </div>
+
+    <div>
+  <div class="flex justify-between items-baseline mb-2 font-mono text-sm gap-2">
+    <span class="text-ink whitespace-nowrap">MERN Stack</span>
+    <span class="text-cyan shrink-0">92%</span>
+  </div>
+  <div class="w-full h-2 bg-line rounded-full overflow-hidden">
+    <div class="skill-fill h-full bg-cyan rounded-full" data-width="92"></div>
+  </div>
+</div>
+
+    <div>
+      <div class="flex justify-between items-baseline mb-2 font-mono text-sm gap-2">
+        <span class="text-ink whitespace-nowrap">Deep Learning</span>
+        <span class="text-cyan shrink-0">80%</span>
+      </div>
+      <div class="w-full h-2 bg-line rounded-full overflow-hidden">
+        <div class="skill-fill h-full bg-cyan rounded-full" data-width="80"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex justify-between items-baseline mb-2 font-mono text-sm gap-2">
+        <span class="text-ink whitespace-nowrap">C / C++</span>
+        <span class="text-cyan shrink-0">75%</span>
+      </div>
+      <div class="w-full h-2 bg-line rounded-full overflow-hidden">
+        <div class="skill-fill h-full bg-cyan rounded-full" data-width="75"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex justify-between items-baseline mb-2 font-mono text-sm gap-2">
+        <span class="text-ink whitespace-nowrap">Cybersecurity</span>
+        <span class="text-cyan shrink-0">75%</span>
+      </div>
+      <div class="w-full h-2 bg-line rounded-full overflow-hidden">
+        <div class="skill-fill h-full bg-cyan rounded-full" data-width="65"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education" class="py-24 border-b border-line relative z-10">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-semibold mb-12">Education</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- BSc -->
+      <div class="reveal edu-card group relative bg-surface border border-line rounded-lg p-6 flex flex-col items-center text-center gap-4 overflow-hidden">
+        <span class="absolute left-0 top-0 w-full h-1 bg-cyan/60 group-hover:bg-cyan transition-colors"></span>
+
+        <div class="flex items-center justify-center w-20 h-20 rounded-full border-2 border-cyan/40 group-hover:border-cyan transition-colors">
+          <div class="flex flex-col items-center">
+            <span class="font-mono text-base font-semibold text-cyan">3.58</span>
+            <span class="font-mono text-[10px] text-faint tracking-wide">CGPA</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-mono text-xs text-cyan mb-1">2022 – 2026</p>
+         <h3 class="text-[1rem] font-semibold leading-snug text-ink">B.Sc. in Computer Science &amp; Engineering</h3>
+          <p class="text-faint text-xs mt-2 flex items-center justify-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-cyan shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.42A12.05 12.05 0 0121 15.5c0 2.49-4.03 4.5-9 4.5s-9-2.01-9-4.5c0-1.26.99-2.4 2.58-3.24M12 14v7"/></svg>
+            International Islamic University Chittagong (IIUC)
+          </p>
+        </div>
+      </div>
+
+      <!-- HSC -->
+      <div class="reveal edu-card group relative bg-surface border border-line rounded-lg p-6 flex flex-col items-center text-center gap-4 overflow-hidden">
+        <span class="absolute left-0 top-0 w-full h-1 bg-cyan/60 group-hover:bg-cyan transition-colors"></span>
+
+        <div class="flex items-center justify-center w-20 h-20 rounded-full border-2 border-cyan/40 group-hover:border-cyan transition-colors">
+          <div class="flex flex-col items-center">
+            <span class="font-mono text-base font-semibold text-cyan">5.00</span>
+            <span class="font-mono text-[10px] text-faint tracking-wide">GPA</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-mono text-xs text-cyan mb-1">2019 – 2020</p>
+          <h3 class="text-[1rem] font-semibold leading-snug text-ink">Higher Secondary Certificate (HSC)</h3>
+          <p class="text-faint text-xs mt-2 flex items-center justify-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-cyan shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.42A12.05 12.05 0 0121 15.5c0 2.49-4.03 4.5-9 4.5s-9-2.01-9-4.5c0-1.26.99-2.4 2.58-3.24M12 14v7"/></svg>
+            Mahila College, Chattogram
+          </p>
+        </div>
+      </div>
+
+      <!-- SSC -->
+      <div class="reveal edu-card group relative bg-surface border border-line rounded-lg p-6 flex flex-col items-center text-center gap-4 overflow-hidden">
+        <span class="absolute left-0 top-0 w-full h-1 bg-cyan/60 group-hover:bg-cyan transition-colors"></span>
+
+        <div class="flex items-center justify-center w-20 h-20 rounded-full border-2 border-cyan/40 group-hover:border-cyan transition-colors">
+          <div class="flex flex-col items-center">
+            <span class="font-mono text-base font-semibold text-cyan">5.00</span>
+            <span class="font-mono text-[10px] text-faint tracking-wide">GPA</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-mono text-xs text-cyan mb-1">2018</p>
+          <h3 class="text-[1rem] font-semibold leading-snug text-ink">Secondary School Certificate (SSC)</h3>
+          <p class="text-faint text-xs mt-2 flex items-center justify-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-cyan shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.42A12.05 12.05 0 0121 15.5c0 2.49-4.03 4.5-9 4.5s-9-2.01-9-4.5c0-1.26.99-2.4 2.58-3.24M12 14v7"/></svg>
+            P.D.B. High School
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+ 
+<section id="projects" class="py-24 border-b border-line">
+  <div class="projects-container mx-auto px-6 sm:px-10 lg:px-14">
+
+    <h2 class="text-3xl md:text-4xl font-semibold mb-8">Featured Projects</h2>
+
+    <div id="filters" class="flex flex-wrap gap-2 mb-10 font-mono text-xs">
+      <button data-filter="all" class="filter-btn active-filter border border-line rounded-full px-4 py-2">all</button>
+      <button data-filter="web" class="filter-btn border border-line rounded-full px-4 py-2">web dev</button>
+      <button data-filter="ml" class="filter-btn border border-line rounded-full px-4 py-2">machine learning</button>
+      <button data-filter="cv" class="filter-btn border border-line rounded-full px-4 py-2">computer vision</button>
+      <button data-filter="security" class="filter-btn border border-line rounded-full px-4 py-2">security</button>
+      <button data-filter="cpp" class="filter-btn border border-line rounded-full px-4 py-2">c / c++</button>
+    </div>
+
+    <div id="project-grid" class="projects-grid">
+
+      <article data-category="web" class="project-card reveal h-full bg-surface border border-line rounded-lg overflow-hidden flex flex-col">
+        <a href="https://github.com/joyti39/Restaurant-Management-System" target="_blank" rel="noopener noreferrer" class="block">
+          <img src="img3.jpg" alt="Restaurant Management System" class="w-full h-48 object-cover">
+        </a>
+        <div class="flex flex-col flex-1 p-5">
+          <h3 class="text-lg font-semibold mb-2">Restaurant Management System</h3>
+          <p class="text-faint text-sm leading-relaxed">
+            A web-based system with an admin panel and customer interface to manage food items, customer information, orders, and restaurant operations.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-4 mb-5">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">PHP</span><span class="tag">MySQL</span>
+          </div>
+          <a href="https://github.com/joyti39/Restaurant-Management-System" target="_blank" rel="noopener noreferrer" class="view-btn mt-auto">
+            View Project
+            <span class="view-btn-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+      <!-- Babylon -->
+<article data-category="web" class="project-card reveal h-full bg-surface border border-line rounded-lg overflow-hidden flex flex-col">
+  <a href="https://github.com/joyti39/Babylon-Civic-Issue-Reporting" target="_blank" rel="noopener noreferrer" class="block">
+    <img src="img10.jpg" alt="Babylon civic issue reporting app" class="w-full h-48 object-cover">
+  </a>
+  <div class="flex flex-col flex-1 p-5">
+    <h3 class="text-lg font-semibold mb-2">Babylon: Civic Issue Reporting</h3>
+    <p class="text-faint text-sm leading-relaxed">
+      Babylon is a civic issue reporting web app where citizens pin road damage, waste and water problems on a map, upvote what matters, and track each issue from reported to fixed with before/after proof.
+    </p>
+    <div class="flex flex-wrap gap-1.5 mt-4 mb-5">
+      <span class="tag">React</span><span class="tag">Tailwind CSS</span><span class="tag">Leaflet</span><span class="tag">Vite</span><span class="tag">JavaScript</span>
+    </div>
+    <a href="https://github.com/f-akhter-t/babylon" target="_blank" rel="noopener noreferrer" class="view-btn mt-auto">
+      View Project
+      <span class="view-btn-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+      </article>
+      <article data-category="ml" class="project-card reveal h-full bg-surface border border-line rounded-lg overflow-hidden flex flex-col">
+        <a href="https://github.com/joyti39/Smart-Credit-Card-Fraud-Detection-System" target="_blank" rel="noopener noreferrer" class="block">
+          <img src="img4.jpg" alt="Credit Card Fraud Detection" class="w-full h-48 object-cover">
+        </a>
+        <div class="flex flex-col flex-1 p-5">
+          <h3 class="text-lg font-semibold mb-2">Credit Card Fraud Detection</h3>
+          <p class="text-faint text-sm leading-relaxed">
+            Detects fraudulent transactions using data preprocessing, feature analysis, and classification on imbalanced data.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-4 mb-5">
+            <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span>
+          </div>
+          <a href="https://github.com/joyti39/Smart-Credit-Card-Fraud-Detection-System" target="_blank" rel="noopener noreferrer" class="view-btn mt-auto">
+            View Project
+            <span class="view-btn-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+
+      <article data-category="cv" class="project-card reveal h-full bg-surface border border-line rounded-lg overflow-hidden flex flex-col">
+        <a href="https://github.com/joyti39?tab=repositories" target="_blank" rel="noopener noreferrer" class="block">
+          <img src="img5.png" alt="Road Damage Detection" class="w-full h-48 object-cover">
+        </a>
+        <div class="flex flex-col flex-1 p-5">
+          <h3 class="text-lg font-semibold mb-2">Road Damage Detection</h3>
+          <p class="text-faint text-sm leading-relaxed">
+            Automated road damage detection for Bangladesh using YOLOv8 and SAM2-assisted annotation.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-4 mb-5">
+            <span class="tag">YOLOv8</span><span class="tag">SAM2</span><span class="tag">Python</span>
+          </div>
+          <a href="https://github.com/joyti39?tab=repositories" target="_blank" rel="noopener noreferrer" class="view-btn mt-auto">
+            View Project
+            <span class="view-btn-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+
+      <article data-category="security" class="project-card reveal h-full bg-surface border border-line rounded-lg overflow-hidden flex flex-col">
+        <a href="https://github.com/joyti39/Biometric_Authentication_System" target="_blank" rel="noopener noreferrer" class="block">
+          <img src="img6.jpg" alt="Biometric Authentication System" class="w-full h-48 object-cover">
+        </a>
+        <div class="flex flex-col flex-1 p-5">
+          <h3 class="text-lg font-semibold mb-2">Biometric Authentication</h3>
+          <p class="text-faint text-sm leading-relaxed">
+            A biometric authentication system for secure user verification using face recognition and liveness detection.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-4 mb-5">
+            <span class="tag">Python</span><span class="tag">Biometrics</span><span class="tag">Security</span>
+          </div>
+          <a href="https://github.com/joyti39/Biometric_Authentication_System" target="_blank" rel="noopener noreferrer" class="view-btn mt-auto">
+            View Project
+            <span class="view-btn-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+
+      <article data-category="ml" class="project-card reveal h-full bg-surface border border-line rounded-lg overflow-hidden flex flex-col">
+        <a href="https://github.com/joyti39/Road-Accident-Severity-Prediction" target="_blank" rel="noopener noreferrer" class="block">
+          <img src="img7.png" alt="Road Accident Severity Prediction" class="w-full h-48 object-cover">
+        </a>
+        <div class="flex flex-col flex-1 p-5">
+          <h3 class="text-lg font-semibold mb-2">Road Accident Severity Prediction</h3>
+          <p class="text-faint text-sm leading-relaxed">
+            Machine learning-based prediction of road accident severity using the US Accidents dataset.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-4 mb-5">
+            <span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">Jupyter</span>
+          </div>
+          <a href="https://github.com/joyti39/Road-Accident-Severity-Prediction" target="_blank" rel="noopener noreferrer" class="view-btn mt-auto">
+            View Project
+            <span class="view-btn-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+
+      <article data-category="security" class="project-card reveal h-full bg-surface border border-line rounded-lg overflow-hidden flex flex-col">
+        <a href="https://github.com/joyti39/Smart-Web-Penetration-Testing-Reporting-Tool" target="_blank" rel="noopener noreferrer" class="block">
+          <img src="img8.jpeg" alt="Smart Web Penetration Testing Reporting Tool" class="w-full h-48 object-cover">
+        </a>
+        <div class="flex flex-col flex-1 p-5">
+          <h3 class="text-lg font-semibold mb-2">Web Pen-Testing Reporting Tool</h3>
+          <p class="text-faint text-sm leading-relaxed">
+            A smart cybersecurity tool for automated web scanning and security report generation.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-4 mb-5">
+            <span class="tag">Shell</span><span class="tag">Cybersecurity</span><span class="tag">Automation</span>
+          </div>
+          <a href="https://github.com/joyti39/Smart-Web-Penetration-Testing-Reporting-Tool" target="_blank" rel="noopener noreferrer" class="view-btn mt-auto">
+            View Project
+            <span class="view-btn-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+
+      <article data-category="cpp" class="project-card reveal h-full bg-surface border border-line rounded-lg overflow-hidden flex flex-col">
+        <a href="https://github.com/joyti39/Movie-Recommendation-System" target="_blank" rel="noopener noreferrer" class="block">
+          <img src="img7.jpeg" alt="Movie Recommendation System" class="w-full h-48 object-cover">
+        </a>
+        <div class="flex flex-col flex-1 p-5">
+          <h3 class="text-lg font-semibold mb-2">Movie Recommendation System</h3>
+          <p class="text-faint text-sm leading-relaxed">
+            A data structures project in C that recommends movies to users.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-4 mb-5">
+            <span class="tag">C</span><span class="tag">Data Structures</span>
+          </div>
+          <a href="https://github.com/joyti39/Movie-Recommendation-System" target="_blank" rel="noopener noreferrer" class="view-btn mt-auto">
+            View Project
+            <span class="view-btn-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+
+      <article data-category="cpp" class="project-card reveal h-full bg-surface border border-line rounded-lg overflow-hidden flex flex-col">
+        <a href="https://github.com/joyti39/Greenhouse-Effect-Animation-OpenGL" target="_blank" rel="noopener noreferrer" class="block">
+          <img src="img8.jpg" alt="Greenhouse Effect Animation" class="w-full h-48 object-cover">
+        </a>
+        <div class="flex flex-col flex-1 p-5">
+          <h3 class="text-lg font-semibold mb-2">Greenhouse Effect Animation</h3>
+          <p class="text-faint text-sm leading-relaxed">
+            A visual and interactive simulation of the Greenhouse Effect using OpenGL and C++.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-4 mb-5">
+            <span class="tag">C++</span><span class="tag">OpenGL</span><span class="tag">Graphics</span>
+          </div>
+          <a href="https://github.com/joyti39/Greenhouse-Effect-Animation-OpenGL" target="_blank" rel="noopener noreferrer" class="view-btn mt-auto">
+            View Project
+            <span class="view-btn-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <p id="no-results" class="hidden text-faint font-mono text-sm mt-8">no projects match this filter.</p>
+  </div>
+</section>
+
+<!-- Achievements -->
+<section id="achievements" class="py-24 border-b border-line">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <h2 class="text-3xl md:text-4xl font-semibold mb-12">Achievements</h2>
+
+    <div class="grid lg:grid-cols-2 gap-14 items-start">
+
+      <!-- Left: Achievement stats -->
+      <div>
+  
+        <div class="space-y-5">
+
+          <div class="reveal achievement-row bg-surface border border-line rounded p-5">
+            <div class="flex items-baseline gap-3">
+              <p class="counter text-2xl font-mono text-cyan shrink-0" data-target="1">0</p>
+              <h3 class="font-semibold">Research Publication</h3>
+            </div>
+            <p class="text-faint text-sm mt-2">
+              Co-authored and presented "Machine Learning and Computational Intelligence Approaches for Prediction and Management of Polycystic Ovary Syndrome" at the 2026 IEEE QPAIN Conference, held at CUET, Chattogram.
+            </p>
+          </div>
+
+          <div class="reveal achievement-row bg-surface border border-line rounded p-5">
+            <div class="flex items-baseline gap-3">
+              <p class="counter text-2xl font-mono text-cyan shrink-0" data-target="6">0</p>
+              <h3 class="font-semibold">Months as Teaching Assistant</h3>
+            </div>
+            <p class="text-faint text-sm mt-2">
+              Assisted CSE faculty for 6 months — supporting lab sessions, grading, and one-on-one help for undergraduates working through core coursework.
+            </p>
+          </div>
+
+          <div class="reveal achievement-row bg-surface border border-line rounded p-5">
+            <div class="flex items-baseline gap-3">
+              <p class="counter text-2xl font-mono text-cyan shrink-0" data-target="3">0</p>
+              <h3 class="font-semibold">Datathons</h3>
+            </div>
+            <p class="text-faint text-sm mt-2">
+              Competed in 3 datathons, including IIUC CSE Fest 2026's Datathon, applying real-world datasets to time-boxed analytical and ML challenges.
+            </p>
+          </div>
+
+          <div class="reveal achievement-row bg-surface border border-line rounded p-5">
+            <div class="flex items-baseline gap-3">
+              <p class="counter text-2xl font-mono text-cyan shrink-0" data-target="2">0</p>
+              <h3 class="font-semibold">CodeChef Rating</h3>
+            </div>
+            <p class="text-faint text-sm mt-2">
+              Achieved 2★ on CodeChef, solving rated contest problems to build stronger competitive programming and algorithmic thinking skills.
+            </p>
+          </div>
+
+          <div class="reveal achievement-row bg-surface border border-line rounded p-5">
+            <div class="flex items-baseline gap-3">
+              <p class="counter text-2xl font-mono text-cyan shrink-0" data-target="8">0</p>
+              <h3 class="font-semibold">Months of ICPC Training</h3>
+            </div>
+            <p class="text-faint text-sm mt-2">
+              Completed Shohoj Coding's 8-month ICPC Preparation Bootcamp (Batch 6), strengthening problem-solving and competitive programming fundamentals.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Certificates -->
+      <div>
+        <div class="inline-block font-mono text-xs text-cyan border border-cyan/40 bg-cyan/10 rounded-md px-3 py-1 mb-6">
+          certificates
+        </div>
+
+        <div class="space-y-3">
+
+          <div class="reveal cert-row">
+            <div class="cert-row-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+            </div>
+            <div class="cert-row-text">
+              <h4>ICISET 2024</h4>
+              <p>Certificate of Appreciation — Student Delegate</p>
+            </div>
+            <button type="button" class="cert-view-btn" data-src="c1.jpg" data-title="ICISET 2024 — Certificate of Appreciation">
+              View
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+
+          <div class="reveal cert-row">
+            <div class="cert-row-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+            </div>
+            <div class="cert-row-text">
+              <h4>IEEE ComSoc — Roadmap to Google</h4>
+              <p>Certificate of Participation</p>
+            </div>
+            <button type="button" class="cert-view-btn" data-src="c2.jpg" data-title="IEEE ComSoc — Roadmap to Google Webinar">
+              View
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+
+          <div class="reveal cert-row">
+            <div class="cert-row-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+            </div>
+            <div class="cert-row-text">
+              <h4>IIUC CSE Fest 2026</h4>
+              <p>Datathon — Certificate of Appreciation</p>
+            </div>
+            <button type="button" class="cert-view-btn" data-src="c3.jpg" data-title="IIUC CSE Fest 2026 — Datathon">
+              View
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+
+          <div class="reveal cert-row">
+            <div class="cert-row-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+            </div>
+            <div class="cert-row-text">
+              <h4>IIUC Tech Fest 2025</h4>
+              <p>Deep Learning in Biomedical Image Analysis — Seminar</p>
+            </div>
+            <button type="button" class="cert-view-btn" data-src="c4.jpg" data-title="IIUC Tech Fest 2025 — Deep Learning Seminar">
+              View
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+
+          <div class="reveal cert-row">
+            <div class="cert-row-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+            </div>
+            <div class="cert-row-text">
+              <h4>Shohoj Coding</h4>
+              <p>ICPC Preparation Bootcamp — Batch 6</p>
+            </div>
+            <button type="button" class="cert-view-btn" data-src="c5.jpg" data-title="Shohoj Coding — ICPC Preparation Bootcamp">
+              View
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+
+          <div class="reveal cert-row">
+            <div class="cert-row-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+            </div>
+            <div class="cert-row-text">
+              <h4>IEEE QPAIN 2026</h4>
+              <p>Certificate of Presentation — Research Paper</p>
+            </div>
+            <button type="button" class="cert-view-btn" data-src="c6.jpg" data-title="IEEE QPAIN 2026 — Paper Presentation">
+              View
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+
+          <div class="reveal cert-row">
+            <div class="cert-row-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+            </div>
+            <div class="cert-row-text">
+              <h4>Microsoft 365 Copilot</h4>
+              <p>Introduction to Microsoft 365 Copilot</p>
+            </div>
+            <button type="button" class="cert-view-btn" data-src="c7.jpg" data-title="Microsoft 365 Copilot — Introduction">
+              View
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+
+          <div class="reveal cert-row">
+            <div class="cert-row-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+            </div>
+            <div class="cert-row-text">
+              <h4>Phitron</h4>
+              <p>C++ Programming &amp; Problem Solving Bootcamp</p>
+            </div>
+            <button type="button" class="cert-view-btn" data-src="c8.jpg" data-title="Phitron — C++ Programming Bootcamp">
+              View
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+
+          <div class="reveal cert-row">
+            <div class="cert-row-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+            </div>
+            <div class="cert-row-text">
+              <h4>AI CERTs</h4>
+              <p>AI+ Prompt Engineer Level 1</p>
+            </div>
+            <button type="button" class="cert-view-btn" data-src="c9.jpg" data-title="AI CERTs — Prompt Engineer Level 1">
+              View
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Certificate Modal  -->
+<div id="cert-modal" class="cert-modal hidden" role="dialog" aria-modal="true" aria-label="Certificate viewer">
+  <div class="cert-modal-backdrop"></div>
+  <div class="cert-modal-body">
+    <button id="cert-close" class="cert-modal-close" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
+    </button>
+
+    <button id="cert-prev" class="cert-modal-nav cert-modal-prev" aria-label="Previous certificate">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+
+    <img id="cert-modal-img" src="" alt="">
+
+    <button id="cert-next" class="cert-modal-nav cert-modal-next" aria-label="Next certificate">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+
+    <p id="cert-modal-caption" class="cert-modal-caption"></p>
+  </div>
+</div>
+
+<!-- Resume Modal -->
+<div id="resume-modal" class="cert-modal hidden" role="dialog" aria-modal="true" aria-label="Resume viewer">
+  <div class="cert-modal-backdrop"></div>
+  <div class="cert-modal-body">
+    <button id="resume-close" class="cert-modal-close" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
+    </button>
+    <img id="resume-modal-img" src="resume.jpg" alt="Sadia Akther Joyti — Resume">
+  </div>
+</div>
+
+<!-- Contact -->
+<section id="contact" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <h2 class="text-3xl md:text-4xl font-semibold mb-12">Contact Me</h2>
+
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+
+      <div class="contact-info-box bg-raised border border-line rounded p-8">
+        <h3 class="text-2xl font-semibold mb-4">Let's work together</h3>
+        <p class="text-faint leading-relaxed mb-8">
+          I'm actively looking for full-time job opportunities, along with research
+          collaborations and software projects. If you have a role or a project in
+          mind, I'd love to hear about it.
+        </p>
+
+        <div class="mb-6">
+          <p class="text-faint text-xs font-mono">email</p>
+          <a href="mailto:sadiaakther885@gmail.com" class="font-medium hover:text-cyan">sadiaakther885@gmail.com</a>
+        </div>
+        <div class="mb-6">
+          <p class="text-faint text-xs font-mono">location</p>
+          <p class="font-medium">Chattogram, Bangladesh</p>
+        </div>
+        <div>
+          <p class="text-faint text-xs font-mono">mobile</p>
+          <a href="tel:+8801795954613" class="font-medium hover:text-cyan">+880 1795954613</a>
+        </div>
+      </div>
+
+      <div class="contact-form-box bg-surface border border-line rounded p-8">
+  <form id="contact-form" novalidate>
+
+    <div class="mb-5">
+      <label class="block font-mono text-xs text-faint mb-2">name</label>
+      <input type="text" name="fi-sender-firstName" id="field-name" placeholder="Enter your name"
+             class="w-full px-4 py-3 rounded bg-base border border-line focus:outline-none focus:border-cyan">
+      <p class="field-error hidden text-amber text-xs font-mono mt-1">this field is required.</p>
+    </div>
+
+    <div class="mb-5">
+      <label class="block font-mono text-xs text-faint mb-2">email address</label>
+      <input type="email" name="fi-sender-email" id="field-email" placeholder="you@example.com"
+             class="w-full px-4 py-3 rounded bg-base border border-line focus:outline-none focus:border-cyan">
+      <p class="field-error hidden text-amber text-xs font-mono mt-1">enter a valid email.</p>
+    </div>
+
+    <div class="mb-6">
+      <label class="block font-mono text-xs text-faint mb-2">message</label>
+      <textarea name="fi-text-message" id="field-message" rows="5" placeholder="Write your message..."
+                class="w-full px-4 py-3 rounded bg-base border border-line focus:outline-none focus:border-cyan"></textarea>
+      <p class="field-error hidden text-amber text-xs font-mono mt-1">this field is required.</p>
+    </div>
+
+    <button type="submit" id="submit-btn" class="w-full bg-cyan text-base py-3 rounded font-mono font-semibold hover:bg-amber transition-colors">
+      send
+    </button>
+    <p id="form-status" class="text-center text-xs font-mono text-cyan mt-4 hidden">message ready — opening your email client…</p>
+  </form>
+</div>
+</div>
+  </div>
+</section>
+
+<footer class="border-t border-line py-8">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <p class="text-faint text-sm mt-2">Building ideas with technology.</p>
+
+    <div class="flex gap-4 mt-6 justify-center">
+      <a href="https://www.linkedin.com/in/sadia-akther-joyti" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
+         class="social-btn w-11 h-11 rounded-full bg-surface border border-line flex items-center justify-center hover:border-cyan hover:text-cyan transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.36 4.25 5.44v6.3zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+      </a>
+      <a href="https://github.com/joyti39" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
+         class="social-btn w-11 h-11 rounded-full bg-surface border border-line flex items-center justify-center hover:border-cyan hover:text-cyan transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.98 5.24.98 11.52c0 5.03 3.26 9.29 7.79 10.8.57.1.78-.25.78-.55v-2.15c-3.17.69-3.83-1.36-3.83-1.36-.52-1.32-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.53-.29-5.19-1.27-5.19-5.63 0-1.24.44-2.26 1.17-3.06-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.14 1.17a10.9 10.9 0 0 1 5.72 0c2.18-1.48 3.14-1.17 3.14-1.17.62 1.58.23 2.75.11 3.04.73.8 1.17 1.82 1.17 3.06 0 4.37-2.67 5.33-5.21 5.62.41.36.77 1.06.77 2.14v3.17c0 .3.21.66.79.55A11.03 11.03 0 0 0 23.02 11.5C23.02 5.24 18.27.5 12 .5z"/></svg>
+      </a>
+      <a href="mailto:sadiaakther885@gmail.com" aria-label="Email"
+         class="social-btn w-11 h-11 rounded-full bg-surface border border-line flex items-center justify-center hover:border-cyan hover:text-cyan transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6.75A2.25 2.25 0 0 1 5.25 4.5h13.5A2.25 2.25 0 0 1 21 6.75m-18 0v10.5A2.25 2.25 0 0 0 5.25 19.5h13.5A2.25 2.25 0 0 0 21 17.25V6.75m-18 0 8.15 6.11a1.5 1.5 0 0 0 1.8 0L21 6.75"/></svg>
+      </a>
+    </div>
+
+    <p class="text-faint/70 text-xs font-mono mt-4">© 2026 Sadia Akther Joyti. All rights reserved.</p>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top"
+        class="hidden fixed bottom-6 right-6 z-40 bg-surface border border-line hover:border-cyan text-cyan w-12 h-12 rounded-full items-center justify-center">
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/>
+  </svg>
+</button>
+<script src="https://forminit.com/sdk/v1/forminit.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
