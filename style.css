@@ -198,7 +198,21 @@ footer {
   background-image: linear-gradient(90deg, var(--color-amber), var(--color-violet));
   box-shadow: var(--shadow-ambient), 0 0 24px var(--glow-amber);
 }
+/* ===== NAVBAR FONT: Roboto ===== */
+#site-header,
+#site-header .font-mono,
+#site-header .nav-link,
+#site-header .hire-btn,
+#mobile-menu,
+#mobile-menu a {
+  font-family: 'Roboto', system-ui, sans-serif;
+}
 
+#site-header .nav-link,
+#mobile-menu a {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
 /* ---------- view project button ---------- */
 .view-btn {
   display: inline-flex;
@@ -951,4 +965,144 @@ a[href="#contact"].border-cyan svg,
 a[href="#contact"].border-cyan:hover svg,
 .cert-view-btn:hover svg {
   transform: translateX(4px);
+}
+/* ===== MOBILE RESPONSIVE FIXES ===== */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* grid items shrink instead of stretching the page */
+section .grid > * {
+  min-width: 0;
+}
+
+/* About + Achievements: single column below lg */
+@media (max-width: 1023px) {
+  #about .grid.lg\:grid-cols-2,
+  #achievements .grid.lg\:grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Education + Contact (+ hero): single column below md */
+@media (max-width: 767px) {
+  .grid.md\:grid-cols-2,
+  .grid.md\:grid-cols-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  /* skills: one per row, labels can wrap */
+  #about .grid.grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #about .whitespace-nowrap {
+    white-space: normal;
+  }
+
+  /* certificates: allow long titles to wrap instead of cutting off */
+  .cert-row {
+    gap: 0.7rem;
+    padding: 0.8rem;
+  }
+  .cert-row-text h4,
+  .cert-row-text p {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  .cert-view-btn {
+    padding: 0.35rem 0.65rem;
+  }
+
+  /* project button a bit wider on small screens */
+  .view-btn {
+    width: auto;
+    min-width: 48%;
+  }
+
+  /* achievements: counter + title can wrap */
+  .achievement-row .flex {
+    flex-wrap: wrap;
+  }
+
+  /* modal controls stay inside the screen */
+  .cert-modal-close {
+    top: -2.8rem;
+    right: 0;
+  }
+  .cert-modal-body {
+    max-width: 94vw;
+  }
+}
+/* ===== SCROLL POP-UP EFFECT ===== */
+/* old fade effect off, notun pop-ta ekhon shob handle kore */
+.reveal,
+#about .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.pop {
+  opacity: 0;
+}
+
+.pop.pop-in {
+  opacity: 1;
+  animation: popUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+@keyframes popUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pop { opacity: 1; }
+  .pop.pop-in { animation: none; }
+}
+/* ===== POP EFFECT: MOBILE TUNING ===== */
+@media (max-width: 767px) {
+  .pop.pop-in {
+    animation-duration: 0.6s;
+  }
+
+  @keyframes popUp {
+    from {
+      opacity: 0;
+      transform: translateY(36px) scale(0.94);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+/* touch devices: no hover, so lift cards briefly when tapped */
+@media (hover: none) {
+  .pop.pop-in {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+/* ===== VIEW PROJECT BUTTON: compact on mobile ===== */
+.view-btn {
+  align-self: flex-start;
+}
+
+@media (max-width: 640px) {
+  .view-btn {
+    width: auto;
+    min-width: 0;
+    gap: 1.5rem;
+    padding: 0.6rem 1rem;
+  }
 }

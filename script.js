@@ -475,11 +475,34 @@ if (certBtns.length && certModal) {
     submitBtn.textContent = 'send';
   });
 
-  [nameField, emailField, msgField].forEach(field => {
+   [nameField, emailField, msgField].forEach(field => {
     field.addEventListener('input', () => {
       field.classList.remove('field-invalid');
       field.parentElement.querySelector('.field-error').classList.add('hidden');
     });
+  });
+
+  /* ---------- scroll pop-up effect ---------- */
+  const popTargets = document.querySelectorAll(
+    'section h2, .edu-card, .project-card, .achievement-row, .cert-row, ' +
+    '.contact-info-box, .contact-form-box, #about .reveal, #filters, footer > div'
+  );
+
+  const popObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('pop-in');
+        popObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  popTargets.forEach((el) => {
+    el.classList.add('pop');
+    const index = [...el.parentElement.children].indexOf(el);
+    const isMobile = window.innerWidth < 768;
+    el.style.animationDelay = isMobile ? '0s' : `${(index % 3) * 0.12}s`;
+    popObserver.observe(el);
   });
 
 });
